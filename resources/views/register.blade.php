@@ -1,4 +1,8 @@
-<x-model-layout>
+@php
+    // Page title
+    $title = "Registration"
+@endphp
+<x-model-layout :title="$title">
     <!-- Nested Row within Card Body -->
     <div class="row">
         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
@@ -10,31 +14,32 @@
                 <form class="user">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                            <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName"
                                 placeholder="First Name">
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                            <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName"
                                 placeholder="Last Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail"
                             placeholder="Email Address">
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                            <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword"
                                 placeholder="Password">
                         </div>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
+                            <input type="password" class="form-control form-control-user" name="password2" id="exampleRepeatPassword"
                                 placeholder="Repeat Password">
                         </div>
                     </div>
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+                    {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                         Register Account
-                    </a>
+                    </a> --}}
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Register with Google
@@ -45,10 +50,10 @@
                 </form>
                 <hr>
                 <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                    <a class="small" href="/forgetpassword">Forgot Password?</a>
                 </div>
                 <div class="text-center">
-                    <a class="small" href="login.html">Already have an account? Login!</a>
+                    <a class="small" href="/">Already have an account? Login!</a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
-<x-layout>
+@php
+    $title = "home"
+@endphp
+<x-layout :title="$title">
     <!-- Page Heading -->
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
