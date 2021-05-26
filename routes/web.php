@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\userController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +30,5 @@ Route::get('/register', function () {
 Route::get('/forgetpassword', function () {
     return view('forgetpass');
 });
+
+Route::post('/registersuccess', [userController::class, 'registerUser']);

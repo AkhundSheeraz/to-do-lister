@@ -1,8 +1,4 @@
-@php
-    // Page title
-    $title = "Registration"
-@endphp
-<x-model-layout :title="$title">
+<x-model-layout title="Registration">
     <!-- Nested Row within Card Body -->
     <div class="row">
         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
@@ -11,35 +7,32 @@
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
-                <form class="user">
+                <form class="user" id="registerForm">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName"
-                                placeholder="First Name">
+                                placeholder="First Name" required>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName"
-                                placeholder="Last Name">
+                                placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail"
-                            placeholder="Email Address">
+                            placeholder="Email Address" required>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword"
-                                placeholder="Password">
+                                placeholder="Password" required>
                         </div>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control form-control-user" name="password2" id="exampleRepeatPassword"
-                                placeholder="Repeat Password">
+                            <input type="password" class="form-control form-control-user" name="password_confirmation" id="exampleRepeatPassword"
+                                placeholder="Repeat Password" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
-                    {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
-                        Register Account
-                    </a> --}}
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Register with Google

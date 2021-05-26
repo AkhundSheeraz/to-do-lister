@@ -1,9 +1,4 @@
-<!-- Nested Row within Card Body -->
-@php
-    // Page title
-    $title = "Resetpassword"
-@endphp
-<x-model-layout :title="$title">
+<x-model-layout title="Resetpassword">
     <div class="row">
         <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
         <div class="col-lg-6">
@@ -16,12 +11,9 @@
                 <form class="user">
                     <div class="form-group">
                         <input type="email" class="form-control form-control-user" name="usermail" id="exampleInputEmail"
-                            aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                            aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Reset Password</button>
-                    {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
-                        Reset Password
-                    </a> --}}
                 </form>
                 <hr>
                 <div class="text-center">

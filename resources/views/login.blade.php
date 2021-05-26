@@ -1,8 +1,4 @@
-@php
-    // Page title
-    $title = "Login"
-@endphp
-<x-model-layout :title="$title">
+<x-model-layout title="Login">
 <!-- Nested Row within Card Body -->
 <div class="row">
     <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
@@ -15,11 +11,11 @@
                 <div class="form-group">
                     <input type="email" class="form-control form-control-user"
                         id="exampleInputEmail" name="email" aria-describedby="emailHelp"
-                        placeholder="Enter Email Address...">
+                        placeholder="Enter Email Address..." required>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control form-control-user"
-                        id="exampleInputPassword" name="password" placeholder="Password">
+                        id="exampleInputPassword" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox small">
@@ -29,9 +25,6 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
-                {{-- <a href="#" class="btn btn-primary btn-user btn-block">
-                    Login
-                </a> --}}
                 <hr>
                 <a href="index.html" class="btn btn-google btn-user btn-block">
                     <i class="fab fa-google fa-fw"></i> Login with Google

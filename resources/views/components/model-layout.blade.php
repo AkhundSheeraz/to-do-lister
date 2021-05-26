@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>My-App | {{ $title }}</title>
     
     <!-- Custom fonts for this template-->
@@ -41,8 +39,11 @@
     <script src="{{ asset('lib/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
+    {{-- ajax request js --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+    <script src="{{ asset('js/requests.js') }}"></script>
 </body>
 
 </html>
