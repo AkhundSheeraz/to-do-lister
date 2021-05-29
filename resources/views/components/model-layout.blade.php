@@ -13,6 +13,12 @@
         color: tomato !important;
         font-weight: bold !important;
     }
+    .successColor{
+        border: 1px solid green !important;
+        background-color: white !important;
+        color: green !important;
+        font-weight: bold !important;
+    }
 </style>
 <head>
 
