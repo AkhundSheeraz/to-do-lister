@@ -10,29 +10,29 @@
                 <form class="user" id="registerForm">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName"
-                                placeholder="First Name" required>
+                            <input type="text" class="form-control form-control-user" name="firstname" id="FirstName"
+                                placeholder="First Name">
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName"
-                                placeholder="Last Name" required>
+                            <input type="text" class="form-control form-control-user" name="lastname" id="LastName"
+                                placeholder="Last Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail"
-                            placeholder="Email Address" required>
+                        <input type="email" class="form-control form-control-user" name="email" id="InputEmail"
+                            placeholder="Email Address">
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword"
-                                placeholder="Password" required>
+                            <input type="password" class="form-control form-control-user" name="password" id="InputPassword"
+                                placeholder="Password">
                         </div>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control form-control-user" name="password_confirmation" id="exampleRepeatPassword"
-                                placeholder="Repeat Password" required>
+                            <input type="password" class="form-control form-control-user" name="password_confirmation" id="RepeatPassword"
+                                placeholder="Repeat Password">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+                    <button type="submit" id="RegisterBtn" class="btn btn-primary btn-user btn-block">Register Account</button>
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Register with Google

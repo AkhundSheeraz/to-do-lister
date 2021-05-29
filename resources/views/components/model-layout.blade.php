@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    .err{
+        border: 1px solid tomato !important;
+    }
+    .err::placeholder{
+        color: tomato !important;
+    }
+    .errcolor{
+        border: 1px solid tomato !important;
+        background-color: white !important;
+        color: tomato !important;
+        font-weight: bold !important;
+    }
+</style>
 <head>
 
     <meta charset="utf-8">
