@@ -86,3 +86,57 @@ $('#registerForm').on('submit', function (event) {
         }
     })
 });
+
+//login request
+$('#user_Login').on('submit', function (event) {
+    event.preventDefault();
+    const $mail = $('#login_email');
+    const $pass = $('#login_password');
+    const $btn = $('#loginBtn');
+    const $form = $('#user_Login');
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/login_user',
+        type: 'POST',
+        data: $form.serialize()
+    }).done(res => {
+        if (res.status == true) {
+            window.location.href = res.message;
+        } else {
+            if (res.authentication) {
+                $btn.addClass('errcolor');
+                $btn.html(res.authentication);
+                setTimeout(() => {
+                    $btn.removeClass('errcolor');
+                    $btn.html('Login');
+                }, 4000);
+            } else {
+                if (res.Email_error) {
+                    $btn.addClass('errcolor');
+                    $btn.html(res.Email_error);
+                    setTimeout(() => {
+                        $btn.removeClass('errcolor');
+                        $btn.html('Login');
+                    }, 4000);
+                } else {
+                    if (res.error.email != undefined) {
+                        $mail.addClass('err');
+                        $mail.attr("placeholder", res.error.email[0]);
+                        setTimeout(() => {
+                            $mail.removeClass('err');
+                            $mail.attr("placeholder", "Enter Email Address...");
+                        }, 4000);
+                    }
+                    if (res.error.password != undefined) {
+                        $pass.addClass('err');
+                        $pass.attr("placeholder", res.error.password[0]);
+                        setTimeout(() => {
+                            $pass.removeClass('err');
+                            $pass.attr("placeholder", "Password");
+                        }, 4000);
+                    }
+                }
+            }
+        }
+    });
+});

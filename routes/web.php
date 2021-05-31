@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login')->middleware('guest');
 
 Route::get('/home', function () {
     return view('welcome');
@@ -31,4 +31,7 @@ Route::get('/forgetpassword', function () {
     return view('forgetpass');
 });
 
+
+//Post Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);
+Route::post('/login_user', [userController::class, 'loginUser']);
