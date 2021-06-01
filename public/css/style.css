@@ -1,0 +1,70 @@
+.err{
+    border: 1px solid tomato !important;
+}
+.err::placeholder{
+    color: tomato !important;
+}
+.errcolor{
+    border: 1px solid tomato !important;
+    background-color: white !important;
+    color: tomato !important;
+    font-weight: bold !important;
+}
+.successColor{
+    border: 1px solid green !important;
+    background-color: white !important;
+    color: green !important;
+    font-weight: bold !important;
+}
+#add_group{
+    float: right;
+    margin: 0 20px;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: rgb(81, 81, 252);
+    transition: 0.8s;
+}
+#add_group:hover{
+    color: rgb(81, 81, 252);
+    background: white;
+    border: 1px solid rgb(81, 81, 252);
+    font-weight: bold;
+}
+.thismodal{
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    z-index: 99;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 80px;
+    background: white;
+}
+.thismodal h3{
+    text-align: center;
+}
+.hidden{
+    display: none;
+}
+.modal_inp{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 2.5px;
+}
+.modal_btn{
+    border: none;
+    margin-top: 10px;
+    float: right;
+    padding: 5px 20px;
+    border-radius: 5px;
+    color: white;
+    background: rgb(48, 170, 48);
+}

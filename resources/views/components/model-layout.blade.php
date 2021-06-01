@@ -1,25 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    .err{
-        border: 1px solid tomato !important;
-    }
-    .err::placeholder{
-        color: tomato !important;
-    }
-    .errcolor{
-        border: 1px solid tomato !important;
-        background-color: white !important;
-        color: tomato !important;
-        font-weight: bold !important;
-    }
-    .successColor{
-        border: 1px solid green !important;
-        background-color: white !important;
-        color: green !important;
-        font-weight: bold !important;
-    }
-</style>
 <head>
 
     <meta charset="utf-8">
@@ -35,7 +15,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 <body class="bg-gradient-primary">

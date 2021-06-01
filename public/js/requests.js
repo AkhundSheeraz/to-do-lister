@@ -140,3 +140,16 @@ $('#user_Login').on('submit', function (event) {
         }
     });
 });
+
+$('#add_group').click(function(){
+    $('#modal').fadeToggle();
+});
+
+$(document).click(function(e){
+    const $modal = $('#modal');
+    const $btn = $('#add_group'); 
+    if(!$modal.is(e.target) && $modal.has(e.target).length === 0 &&
+     !$btn.is(e.target) && $btn.has(e.target).length === 0){
+        $modal.fadeOut();
+    }
+});

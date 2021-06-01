@@ -89,8 +89,6 @@ class userController extends Controller
         }else{
             $email_Exists = User::where('email',$request->email)->count();
             if($email_Exists > 0){
-                // $user = User::where('email',$request->email)->get();
-                // $credentials = $user->map->only(['id','firstname','email','password']);
                 // No need to fetch and validate use Auth Attempt for session
                 $credentials = $request->only(['email','password']);
                 if(Auth::attempt($credentials)){
@@ -111,5 +109,10 @@ class userController extends Controller
                 ]);
             }
         }
+    }
+
+    public function logoutUser(Request $request){
+        Auth::logout();
+        return redirect('/');
     }
 }

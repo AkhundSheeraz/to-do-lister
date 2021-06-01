@@ -21,7 +21,11 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('welcome');
-});
+})->name('home')->middleware('auth');
+
+Route::get('/group', function () {
+    return view('groups');
+})->name('group')->middleware('auth');
 
 Route::get('/register', function () {
     return view('register');
@@ -31,6 +35,7 @@ Route::get('/forgetpassword', function () {
     return view('forgetpass');
 });
 
+Route::get('/logout', [userController::class, 'logoutUser']);
 
 //Post Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);

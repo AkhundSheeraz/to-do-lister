@@ -13,7 +13,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <x-home-sidebar/>
+        <x-home-sidebar />
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,11 +21,11 @@
 
             <!-- Main Content -->
             <div id="content">
-                
+
                 {{-- top-nav-bar --}}
-                <x-home-nav/>
+                <x-home-nav />
                 {{-- top-nav-bar --}}
-                
+
                 <!-- Begin Page Content -->
                 {{ $slot }}
                 <!-- /.container-fluid -->
@@ -68,7 +68,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -84,12 +84,13 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ asset('lib/chart.js/Chart.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('js/requests.js') }}"></script>
+    
+    @isset($chartJS)
+    
+    {{ $chartJS }}
+    
+    @endisset
 
 </body>
 
