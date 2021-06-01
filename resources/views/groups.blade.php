@@ -7,7 +7,9 @@
     </div>
 
     <x-modal heading="Add a Group">
-        <input class="modal_inp" type="text" name="group_type" placeholder="Enter Group Name..">
-        <button class="modal_btn" type="submit">Add</button>
+        <form id="group_form">
+            <input class="modal_inp" id="grp_inp" type="text" name="group_type" placeholder="Enter group name..">
+            <button class="modal_btn" type="submit">Add</button>
+        </form>
     </x-modal>
 </x-layout>

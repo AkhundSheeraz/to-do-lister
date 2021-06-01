@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\groupController;
 use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,3 +41,5 @@ Route::get('/logout', [userController::class, 'logoutUser']);
 //Post Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);
 Route::post('/login_user', [userController::class, 'loginUser']);
+Route::post('/add_group', [groupController::class, 'addGroup']);
+

@@ -1,3 +1,16 @@
+$('#add_group').click(function () {
+    $('#modal').fadeToggle();
+});
+
+$(document).click(function (e) {
+    const $modal = $('#modal');
+    const $btn = $('#add_group');
+    if (!$modal.is(e.target) && $modal.has(e.target).length === 0 &&
+        !$btn.is(e.target) && $btn.has(e.target).length === 0) {
+        $modal.fadeOut();
+    }
+});
+
 // registration request
 $('#registerForm').on('submit', function (event) {
     event.preventDefault();
@@ -141,15 +154,26 @@ $('#user_Login').on('submit', function (event) {
     });
 });
 
-$('#add_group').click(function(){
-    $('#modal').fadeToggle();
-});
-
-$(document).click(function(e){
-    const $modal = $('#modal');
-    const $btn = $('#add_group'); 
-    if(!$modal.is(e.target) && $modal.has(e.target).length === 0 &&
-     !$btn.is(e.target) && $btn.has(e.target).length === 0){
-        $modal.fadeOut();
-    }
+//add a group
+$('#group_form').on('submit', function (event) {
+    event.preventDefault();
+    const $form = $('#group_form');
+    const $inpfield = $('#grp_inp');
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/add_group',
+        type: 'POST',
+        data: $form.serialize()
+    }).done(res=>{
+        if(res.status == true){
+            console.log(res);
+        }else{
+            $inpfield.addClass('err');
+            $inpfield.attr("placeholder", res.error.group_type[0]);
+            setTimeout(() => {
+                $inpfield.removeClass('err');
+                $inpfield.attr("placeholder", "Enter Group Name..");
+            }, 4000);
+        }
+    });
 });
