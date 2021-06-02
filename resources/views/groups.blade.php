@@ -1,5 +1,5 @@
 <x-layout title="groups">
-    <button id="add_group">Add-Group</button>
+    <button id="add_btn">Add-Group</button>
     <div id="group_div">
         <ul id="group_ul">
             @if (isset($groups))

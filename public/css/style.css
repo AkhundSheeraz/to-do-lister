@@ -1,6 +1,9 @@
 .err{
     border: 1px solid tomato !important;
 }
+.errcoloronly{
+    color: tomato !important;
+}
 .err::placeholder{
     color: tomato !important;
 }
@@ -16,7 +19,7 @@
     color: green !important;
     font-weight: bold !important;
 }
-#add_group{
+#add_btn{
     float: right;
     margin: 0 20px;
     padding: 5px 20px;
@@ -26,7 +29,7 @@
     background: rgb(81, 81, 252);
     transition: 0.8s;
 }
-#add_group:hover{
+#add_btn:hover{
     color: rgb(81, 81, 252);
     background: white;
     border: 1px solid rgb(81, 81, 252);

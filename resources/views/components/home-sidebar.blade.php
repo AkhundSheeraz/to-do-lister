@@ -38,7 +38,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Create Categories</h6>
                 <a class="collapse-item" href="group">Groups</a>
-                <a class="collapse-item" href="#">Checklist</a>
+                <a class="collapse-item" href="checklist">Checklist</a>
             </div>
         </div>
     </li>

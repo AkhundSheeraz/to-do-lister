@@ -1,10 +1,10 @@
-$('#add_group').click(function () {
+$('#add_btn').click(function () {
     $('#modal').fadeToggle();
 });
 
 $(document).click(function (e) {
     const $modal = $('#modal');
-    const $btn = $('#add_group');
+    const $btn = $('#add_btn');
     if (!$modal.is(e.target) && $modal.has(e.target).length === 0 &&
         !$btn.is(e.target) && $btn.has(e.target).length === 0) {
         $modal.fadeOut();
@@ -176,7 +176,7 @@ $('#group_form').on('submit', function (event) {
             if ($check.length > 0) {
                 $('#group_ul').empty();
                 $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
-            }else{
+            } else {
                 $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
             }
         } else {
@@ -185,6 +185,37 @@ $('#group_form').on('submit', function (event) {
             setTimeout(() => {
                 $inpfield.removeClass('err');
                 $inpfield.attr("placeholder", "Enter Group Name..");
+            }, 3000);
+        }
+    });
+});
+
+//add a checklist
+$('#checklist_form').on('submit', function (event) {
+    event.preventDefault();
+    const $form = $('#checklist_form');
+    const $chkinput = $('#check_inp');
+    const $check_defualt = $('#check_defualt');
+    const $checkoptinputs = $('#check_opts');
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/add_checklist',
+        type: 'POST',
+        data: $form.serialize()
+    }).done(res => {
+        if (res.status == true) {
+            console.log(res);
+            document.getElementById('checklist_form').reset();
+        } else {
+            $chkinput.addClass('err');
+            $checkoptinputs.addClass('err errcoloronly');
+            $chkinput.attr("placeholder", res.error.checklist[0]);
+            $check_defualt.html(res.error.group_id[0]);
+            setTimeout(() => {
+                $chkinput.removeClass('err');
+                $checkoptinputs.removeClass('err errcoloronly');
+                $chkinput.attr("placeholder", 'Enter checklist name..');
+                $check_defualt.html('Select-group');
             }, 3000);
         }
     });

@@ -15,8 +15,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('list_id')->unsigned()->index()->nullable();
-            $table->foreign('list_id')->references('id')->on('checklist');
+            $table->bigInteger('checklists_id')->unsigned()->index()->nullable();
+            $table->foreign('checklists_id')->references('id')->on('checklists');
             $table->string('item_name');
             $table->timestamps();
         });
