@@ -29,17 +29,28 @@ class groupController extends Controller
         // $intoDB = auth()->user()->groups()->create([
         //     'type' => $request->group_type
         // ]);
-        
+
         //foreign key should be given with attribute explicitly here!
         $createGroup = new Group;
         $createGroup->user_id = auth()->user()->id;
         $createGroup->type = $request->group_type;
         $createGroup->save();
-        if($createGroup == true){
+        if ($createGroup == true) {
             return response()->json([
                 'status' => true,
-                'message' => 'data inserted'
+                'message' => 'Group Added',
+                'data' => $createGroup
             ]);
+        }
+    }
+
+    public function fetchGroups()
+    {
+        $groups = Group::where('user_id', auth()->user()->id)->get('type');
+        if ($groups->count() > 0) {
+            return view('groups', compact('groups'));
+        } else {
+            return view('groups');
         }
     }
 }

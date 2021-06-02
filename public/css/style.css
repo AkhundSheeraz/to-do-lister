@@ -37,7 +37,7 @@
     margin: 0 auto;
     padding: 10px 20px;
     border-radius: 5px;
-    border: 1px solid;
+    border: 0.5px solid  silver;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     z-index: 99;
     position: fixed;
@@ -67,4 +67,17 @@
     border-radius: 5px;
     color: white;
     background: rgb(48, 170, 48);
+    transition: 0.8s;
+}
+
+.modal_btn:hover{
+    background: white;
+    color: rgb(48, 170, 48);
+    border: 1px solid rgb(48, 170, 48);
+    font-weight: bold;
+}
+
+#msg{
+    float: left;
+    color: rgb(48, 170, 48);
 }

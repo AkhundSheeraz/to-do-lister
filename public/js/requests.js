@@ -159,21 +159,33 @@ $('#group_form').on('submit', function (event) {
     event.preventDefault();
     const $form = $('#group_form');
     const $inpfield = $('#grp_inp');
+    const $msg = $('#msg');
+    const $check = $('#group_ul').children('#null_groups');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_group',
         type: 'POST',
         data: $form.serialize()
-    }).done(res=>{
-        if(res.status == true){
-            console.log(res);
-        }else{
+    }).done(res => {
+        if (res.status == true) {
+            $msg.html(res.message);
+            setTimeout(() => {
+                $msg.html('');
+            }, 3000);
+            document.getElementById('group_form').reset();
+            if ($check.length > 0) {
+                $('#group_ul').empty();
+                $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
+            }else{
+                $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
+            }
+        } else {
             $inpfield.addClass('err');
             $inpfield.attr("placeholder", res.error.group_type[0]);
             setTimeout(() => {
                 $inpfield.removeClass('err');
                 $inpfield.attr("placeholder", "Enter Group Name..");
-            }, 4000);
+            }, 3000);
         }
     });
 });

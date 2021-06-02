@@ -24,9 +24,9 @@ Route::get('/home', function () {
     return view('welcome');
 })->name('home')->middleware('auth');
 
-Route::get('/group', function () {
-    return view('groups');
-})->name('group')->middleware('auth');
+Route::get('/group', [
+    groupController::class, 'fetchGroups'
+])->name('group')->middleware('auth');
 
 Route::get('/register', function () {
     return view('register');
@@ -42,4 +42,3 @@ Route::get('/logout', [userController::class, 'logoutUser']);
 Route::post('/registersuccess', [userController::class, 'registerUser']);
 Route::post('/login_user', [userController::class, 'loginUser']);
 Route::post('/add_group', [groupController::class, 'addGroup']);
-
