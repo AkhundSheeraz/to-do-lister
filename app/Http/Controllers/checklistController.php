@@ -13,7 +13,12 @@ class checklistController extends Controller
     {
         $groups = Group::where('user_id', auth()->user()->id)->get(['id', 'type']);
         if ($groups->count() > 0) {
-            return view('checklist', compact('groups'));
+            $checklists = $this->get_checklists();
+            if($checklists->count() > 0){
+                return view('checklist', compact('groups','checklists'));
+            }else{
+                return view('checklist', compact('groups'));
+            }
         } else {
             return view('checklist');
         }
@@ -50,5 +55,12 @@ class checklistController extends Controller
             ]);
         }
     }
-    
+
+    public function get_checklists()
+    {
+        $checklist = Checklist::whereHas('group', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->get();
+        return $checklist;
+    }
 }

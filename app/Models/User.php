@@ -23,7 +23,8 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function groups(){
+    public function groups()
+    {
         return $this->hasMany(Group::class);
     }
 

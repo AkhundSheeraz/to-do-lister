@@ -12,4 +12,9 @@ class Checklist extends Model
     protected $fillable = [
         'checklist_name'
     ];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

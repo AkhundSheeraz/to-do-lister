@@ -2,7 +2,13 @@
     <button id="add_btn">Add-Checklist</button>
     <div>
         <ul id="checklistings">
+            @if (isset($checklists))
+                @foreach ($checklists as $checklist)
+                    <li><a href="#">{{ ucfirst($checklist->checklist_name) }}</li></a>
+                @endforeach
+            @else
             <li>You Have no checklists</li>
+            @endif
         </ul>
     </div>
 
@@ -19,6 +25,7 @@
                     <option class="opt" value="">No-groups available</option>
                 @endif
             </select>
+            <p class="cmsg"></p>
             <button class="modal_btn" type="submit">Add</button>
         </form>
     </x-modal>

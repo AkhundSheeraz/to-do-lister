@@ -4,7 +4,7 @@
         <ul id="group_ul">
             @if (isset($groups))
                 @foreach ($groups as $group)
-                    <li><a href="#">{{ $group->type }}</a></li>
+                    <li><a href="#">{{ ucfirst($group->type) }}</a></li>
                 @endforeach
             @else
                 <li id="null_groups">No groups to display!</li>

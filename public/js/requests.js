@@ -197,6 +197,7 @@ $('#checklist_form').on('submit', function (event) {
     const $chkinput = $('#check_inp');
     const $check_defualt = $('#check_defualt');
     const $checkoptinputs = $('#check_opts');
+    const $cmsg = $('.cmsg');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_checklist',
@@ -204,7 +205,10 @@ $('#checklist_form').on('submit', function (event) {
         data: $form.serialize()
     }).done(res => {
         if (res.status == true) {
-            console.log(res);
+            $cmsg.html(res.message);
+            setTimeout(() => {
+                $cmsg.html('');
+            }, 3000)
             document.getElementById('checklist_form').reset();
         } else {
             $chkinput.addClass('err');

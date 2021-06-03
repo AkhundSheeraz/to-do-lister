@@ -80,7 +80,13 @@
     font-weight: bold;
 }
 
+.cmsg{
+    float: left;
+    color: rgb(48, 170, 48);
+}
+
 #msg{
     float: left;
     color: rgb(48, 170, 48);
 }
+

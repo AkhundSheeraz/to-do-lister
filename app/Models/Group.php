@@ -12,4 +12,14 @@ class Group extends Model
     protected $fillable = [
         'type'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function checklists()
+    {
+        return $this->hasMany(Checklist::class);
+    }
 }
