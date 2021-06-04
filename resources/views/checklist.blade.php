@@ -7,7 +7,7 @@
                     <li><a href="#">{{ ucfirst($checklist->checklist_name) }}</li></a>
                 @endforeach
             @else
-            <li>You Have no checklists</li>
+            <li id="null_lists">You Have no checklists</li>
             @endif
         </ul>
     </div>

@@ -33,6 +33,10 @@ Route::get('/checklist', [
     checklistController::class, 'Get_groups'
 ])->name('checklist')->middleware('auth');
 
+Route::get('/view_list', function () {
+    return view('view_checklist');
+})->name('view_list');
+
 Route::get('/register', function () {
     return view('register');
 });

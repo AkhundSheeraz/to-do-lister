@@ -11,6 +11,10 @@ $(document).click(function (e) {
     }
 });
 
+function ucfirst(str){
+    return str[0].toUpperCase() + str.substring(1);
+}
+
 // registration request
 $('#registerForm').on('submit', function (event) {
     event.preventDefault();
@@ -175,9 +179,9 @@ $('#group_form').on('submit', function (event) {
             document.getElementById('group_form').reset();
             if ($check.length > 0) {
                 $('#group_ul').empty();
-                $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
+                $('#group_ul').append('<li><a href="#">' + ucfirst(res.data.type) + '</a></li>');
             } else {
-                $('#group_ul').append('<li><a href="#">' + res.data.type + '</a></li>')
+                $('#group_ul').append('<li><a href="#">' + ucfirst(res.data.type) + '</a></li>');
             }
         } else {
             $inpfield.addClass('err');
@@ -198,6 +202,7 @@ $('#checklist_form').on('submit', function (event) {
     const $check_defualt = $('#check_defualt');
     const $checkoptinputs = $('#check_opts');
     const $cmsg = $('.cmsg');
+    const $check = $('#checklistings').children('#null_lists');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_checklist',
@@ -210,6 +215,12 @@ $('#checklist_form').on('submit', function (event) {
                 $cmsg.html('');
             }, 3000)
             document.getElementById('checklist_form').reset();
+            if ($check.length > 0) {
+                $('#checklistings').empty();
+                $('#checklistings').append('<li><a href="#">' + ucfirst(res.data.checklist_name) + '</a></li>');
+            } else {
+                $('#checklistings').append('<li><a href="#">' + ucfirst(res.data.checklist_name) + '</a></li>');
+            }
         } else {
             $chkinput.addClass('err');
             $checkoptinputs.addClass('err errcoloronly');
