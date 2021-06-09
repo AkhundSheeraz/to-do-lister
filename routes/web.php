@@ -33,9 +33,7 @@ Route::get('/checklist', [
     checklistController::class, 'Get_groups'
 ])->name('checklist')->middleware('auth');
 
-Route::get('/view_list', function () {
-    return view('view_checklist');
-})->name('view_list');
+Route::get('/view_list/{id}', [checklistController::class,'get_taskoritems'])->name('view_list');
 
 Route::get('/register', function () {
     return view('register');
@@ -52,3 +50,4 @@ Route::post('/registersuccess', [userController::class, 'registerUser']);
 Route::post('/login_user', [userController::class, 'loginUser']);
 Route::post('/add_group', [groupController::class, 'addGroup']);
 Route::post('/add_checklist', [checklistController::class, 'add_checklist']);
+Route::post('/add_item', [checklistController::class, 'insert_taskorItem']);

@@ -17,4 +17,9 @@ class Checklist extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Items::class);
+    }
 }

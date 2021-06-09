@@ -90,3 +90,8 @@
     color: rgb(48, 170, 48);
 }
 
+#chk_table{
+max-width: 80% !important;
+margin: 0 auto !important;
+}
+

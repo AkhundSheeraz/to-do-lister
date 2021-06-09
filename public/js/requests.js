@@ -11,7 +11,7 @@ $(document).click(function (e) {
     }
 });
 
-function ucfirst(str){
+function ucfirst(str) {
     return str[0].toUpperCase() + str.substring(1);
 }
 
@@ -232,6 +232,61 @@ $('#checklist_form').on('submit', function (event) {
                 $chkinput.attr("placeholder", 'Enter checklist name..');
                 $check_defualt.html('Select-group');
             }, 3000);
+        }
+    });
+});
+
+//adding item
+$('#add_task_item').on('submit', function (event) {
+    event.preventDefault();
+    $form = $('#add_task_item');
+    $checklist_id = $('#chk_table').attr('data-id');
+    $forminput = $('#taskiteminp');
+    $ierr = $('#ierr');
+    $insideList = $("#chk_table").find("#null_items");
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/add_item',
+        type: 'POST',
+        data: $form.serialize() + "&id=" + $checklist_id
+    }).done(res => {
+        if (res.status == true) {
+            $ierr.html(res.message);
+            setTimeout(() => {
+                $ierr.html("");
+            }, 3000);
+            document.getElementById("add_task_item").reset();
+            if ($insideList.length > 0) {
+                $insideList.remove();
+                $tablebody = $('#tablebody').children();
+                $rownum = $tablebody.length;
+                $("#chk_table tr:last").after(
+                    "<tr>" +
+                    "<td>" + parseInt($rownum + 1) + "</td>" +
+                    "<td>" + res.data.item_name + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "<td>" + "nil" + "</td>"
+                    + "</tr>"
+                );
+            } else {
+                $tablebody = $('#tablebody').children();
+                $rownum = $tablebody.length;
+                $("#chk_table tr:last").after(
+                    "<tr>" +
+                    "<td>" + parseInt($rownum + 1) + "</td>" +
+                    "<td>" + res.data.item_name + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "<td>" + "nil" + "</td>"
+                    + "</tr>"
+                );
+            }
+        } else {
+            $forminput.addClass('err');
+            $forminput.attr("placeholder", res.error.task_item[0]);
+            setTimeout(() => {
+                $forminput.removeClass('err');
+                $forminput.attr("placeholder", "task or item");
+            }, 3000)
         }
     });
 });

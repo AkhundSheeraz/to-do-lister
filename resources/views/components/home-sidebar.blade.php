@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="home">
+        <a class="nav-link" href="/home">
             <i class="fas fa-home"></i>
             <span>Home</span></a>
     </li>
@@ -37,8 +37,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Create Categories</h6>
-                <a class="collapse-item" href="group">Groups</a>
-                <a class="collapse-item" href="checklist">Checklist</a>
+                <a class="collapse-item" href="/group">Groups</a>
+                <a class="collapse-item" href="/checklist">Checklist</a>
             </div>
         </div>
     </li>

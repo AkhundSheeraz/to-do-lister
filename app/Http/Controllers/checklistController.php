@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Checklist;
 use App\Models\Group;
+use App\Models\Items;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,9 +15,9 @@ class checklistController extends Controller
         $groups = Group::where('user_id', auth()->user()->id)->get(['id', 'type']);
         if ($groups->count() > 0) {
             $checklists = $this->get_checklists();
-            if($checklists->count() > 0){
-                return view('checklist', compact('groups','checklists'));
-            }else{
+            if ($checklists->count() > 0) {
+                return view('checklist', compact('groups', 'checklists'));
+            } else {
                 return view('checklist', compact('groups'));
             }
         } else {
@@ -62,5 +63,44 @@ class checklistController extends Controller
             $query->where('user_id', auth()->user()->id);
         })->get();
         return $checklist;
+    }
+
+    public function insert_taskorItem(Request $request)
+    {
+        $data = $request->all();
+        $rules = [
+            'task_item' => ['required']
+        ];
+        $error = [
+            'task_item.required' => 'Insert task or item please!'
+        ];
+        $validation = Validator::make($data, $rules, $error);
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'error' => $validation->errors()->toArray()
+            ]);
+        }
+        $addIn_checklist = new Items;
+        $addIn_checklist->checklists_id = $request->id;
+        $addIn_checklist->item_name = $request->task_item;
+        $addIn_checklist->save();
+        if ($addIn_checklist == true) {
+            return response()->json([
+                'status' => true,
+                'message' => "Task/Item inserted",
+                'data' => $addIn_checklist
+            ]);
+        }
+    }
+
+    public function get_taskoritems($id)
+    {
+        $fetching = Items::where('checklists_id', $id)->get();
+        if ($fetching->count() > 0) {
+            return view('view_checklist', ['id' => $id])->with(compact('fetching'));
+        } else {
+            return view('view_checklist', ['id' => $id]);
+        }
     }
 }

@@ -4,7 +4,7 @@
         <ul id="checklistings">
             @if (isset($checklists))
                 @foreach ($checklists as $checklist)
-                    <li><a href="#">{{ ucfirst($checklist->checklist_name) }}</li></a>
+                    <li><a href="{{Route('view_list',$checklist->id)}}">{{ ucfirst($checklist->checklist_name) }}</li></a>
                 @endforeach
             @else
             <li id="null_lists">You Have no checklists</li>
