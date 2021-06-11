@@ -96,7 +96,11 @@ class checklistController extends Controller
 
     public function get_taskoritems($id)
     {
-        $fetching = Items::where('checklists_id', $id)->get();
+        $fetching = Items::whereHas('checklists', function ($query) use($id){
+            $query->whereHas('group', function ($queryagain) {
+                $queryagain->where('user_id', auth()->user()->id);
+            })->where('checklists_id',$id);
+        })->get();
         if ($fetching->count() > 0) {
             return view('view_checklist', ['id' => $id])->with(compact('fetching'));
         } else {

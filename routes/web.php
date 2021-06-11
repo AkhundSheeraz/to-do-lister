@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\checklistController;
 use App\Http\Controllers\groupController;
+use App\Http\Controllers\itemController;
 use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,9 @@ Route::get('/checklist', [
     checklistController::class, 'Get_groups'
 ])->name('checklist')->middleware('auth');
 
-Route::get('/view_list/{id}', [checklistController::class,'get_taskoritems'])->name('view_list');
+Route::get('/view_list/{id}', [
+    checklistController::class, 'get_taskoritems'
+])->name('view_list')->middleware('auth');
 
 Route::get('/register', function () {
     return view('register');
@@ -51,3 +54,4 @@ Route::post('/login_user', [userController::class, 'loginUser']);
 Route::post('/add_group', [groupController::class, 'addGroup']);
 Route::post('/add_checklist', [checklistController::class, 'add_checklist']);
 Route::post('/add_item', [checklistController::class, 'insert_taskorItem']);
+Route::post('/status',[itemController::class,'change_status']);

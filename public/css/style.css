@@ -1,25 +1,25 @@
-.err{
+.err {
     border: 1px solid tomato !important;
 }
-.errcoloronly{
+.errcoloronly {
     color: tomato !important;
 }
-.err::placeholder{
+.err::placeholder {
     color: tomato !important;
 }
-.errcolor{
+.errcolor {
     border: 1px solid tomato !important;
     background-color: white !important;
     color: tomato !important;
     font-weight: bold !important;
 }
-.successColor{
+.successColor {
     border: 1px solid green !important;
     background-color: white !important;
     color: green !important;
     font-weight: bold !important;
 }
-#add_btn{
+#add_btn {
     float: right;
     margin: 0 20px;
     padding: 5px 20px;
@@ -29,18 +29,18 @@
     background: rgb(81, 81, 252);
     transition: 0.8s;
 }
-#add_btn:hover{
+#add_btn:hover {
     color: rgb(81, 81, 252);
     background: white;
     border: 1px solid rgb(81, 81, 252);
     font-weight: bold;
 }
-.thismodal{
+.thismodal {
     width: 50%;
     margin: 0 auto;
     padding: 10px 20px;
     border-radius: 5px;
-    border: 0.5px solid  silver;
+    border: 0.5px solid silver;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     z-index: 99;
     position: fixed;
@@ -49,20 +49,20 @@
     top: 80px;
     background: white;
 }
-.thismodal h3{
+.thismodal h3 {
     text-align: center;
 }
-.hidden{
+.hidden {
     display: none;
 }
-.modal_inp{
+.modal_inp {
     width: 100%;
     box-sizing: border-box;
     border: 1px solid silver;
     border-radius: 5px;
     padding: 2.5px;
 }
-.modal_btn{
+.modal_btn {
     border: none;
     margin-top: 10px;
     float: right;
@@ -73,25 +73,47 @@
     transition: 0.8s;
 }
 
-.modal_btn:hover{
+.modal_btn:hover {
     background: white;
     color: rgb(48, 170, 48);
     border: 1px solid rgb(48, 170, 48);
     font-weight: bold;
 }
 
-.cmsg{
+.cmsg {
     float: left;
     color: rgb(48, 170, 48);
 }
 
-#msg{
+#msg {
     float: left;
     color: rgb(48, 170, 48);
 }
 
-#chk_table{
-max-width: 80% !important;
-margin: 0 auto !important;
+#chk_table {
+    max-width: 80% !important;
+    margin: 0 auto !important;
 }
 
+.cross {
+    color: tomato !important;
+    font-size: 20px !important;
+    transition: 0.8s;
+}
+.cross:hover{
+    color: red !important;
+    font-size: 25px !important;
+    cursor: pointer;
+}
+
+.checkmark{
+    color: limegreen !important;
+    font-size: 20px !important;
+    transition: 0.8s;
+}
+
+.checkmark:hover{
+    color: green !important;
+    font-size: 25px !important;
+    cursor: pointer;
+}

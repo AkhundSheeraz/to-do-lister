@@ -217,14 +217,16 @@ $('#checklist_form').on('submit', function (event) {
             document.getElementById('checklist_form').reset();
             if ($check.length > 0) {
                 $('#checklistings').empty();
-                $('#checklistings').append('<li><a href="#">' + ucfirst(res.data.checklist_name) + '</a></li>');
+                $('#checklistings').append('<li><a href="http://my-app.test/view_list/' + res.data.id + '">' + ucfirst(res.data.checklist_name) + '</a></li>');
             } else {
-                $('#checklistings').append('<li><a href="#">' + ucfirst(res.data.checklist_name) + '</a></li>');
+                $('#checklistings').append('<li><a href="http://my-app.test/view_list/' + res.data.id + '">' + ucfirst(res.data.checklist_name) + '</a></li>');
             }
         } else {
             $chkinput.addClass('err');
             $checkoptinputs.addClass('err errcoloronly');
-            $chkinput.attr("placeholder", res.error.checklist[0]);
+            if(res.error.checklist != undefined){
+                $chkinput.attr("placeholder", res.error.checklist[0]);
+            }
             $check_defualt.html(res.error.group_id[0]);
             setTimeout(() => {
                 $chkinput.removeClass('err');
@@ -243,7 +245,7 @@ $('#add_task_item').on('submit', function (event) {
     $checklist_id = $('#chk_table').attr('data-id');
     $forminput = $('#taskiteminp');
     $ierr = $('#ierr');
-    $insideList = $("#chk_table").find("#null_items");
+    $insideList = $("#tablebody").find("#null_items");
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_item',
@@ -260,23 +262,23 @@ $('#add_task_item').on('submit', function (event) {
                 $insideList.remove();
                 $tablebody = $('#tablebody').children();
                 $rownum = $tablebody.length;
-                $("#chk_table tr:last").after(
-                    "<tr>" +
+                $("#tablebody").append(
+                    "<tr class='text-center'>" +
                     "<td>" + parseInt($rownum + 1) + "</td>" +
                     "<td>" + res.data.item_name + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
-                    "<td>" + "nil" + "</td>"
+                    "<td>" + "<div class='off_on' data-id='"+ res.data.id +"'><i class='far fa-times-circle cross'></i></div>" + "</td>"
                     + "</tr>"
                 );
             } else {
                 $tablebody = $('#tablebody').children();
                 $rownum = $tablebody.length;
-                $("#chk_table tr:last").after(
-                    "<tr>" +
+                $("#tablebody").append(
+                    "<tr class='text-center'>" +
                     "<td>" + parseInt($rownum + 1) + "</td>" +
                     "<td>" + res.data.item_name + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
-                    "<td>" + "nil" + "</td>"
+                    "<td>" + "<div class='off_on' data-id='"+ res.data.id +"'><i class='far fa-times-circle cross'></i></div>" + "</td>"
                     + "</tr>"
                 );
             }
@@ -290,3 +292,22 @@ $('#add_task_item').on('submit', function (event) {
         }
     });
 });
+
+$("#tablebody").on("click",".off_on", function () {
+    $id = $(this).attr('data-id');
+    $div = $(this);
+    const data = { id: $id };
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/status',
+        type: 'POST',
+        data: data
+    }).done(res=>{
+        $div.empty();
+        if(res.data.status == 1){
+            $div.append("<i class='far fa-check-circle checkmark'></i>");
+        }else{
+            $div.append("<i class='far fa-times-circle cross'></i>");
+        }
+    });
+})

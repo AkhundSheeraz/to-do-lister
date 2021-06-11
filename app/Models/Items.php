@@ -29,7 +29,7 @@ class Items extends Model
         return Carbon::parse($this->attributes['updated_at'])->diffForHumans();
     }
 
-    public function checklist()
+    public function checklists()
     {
         return $this->belongsTo(Checklist::class);
     }

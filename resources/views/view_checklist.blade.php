@@ -1,17 +1,8 @@
 <x-layout title="view_checklist">
     <button id="add_btn">Add-Items</button>
-    {{-- <ul id="inside_list" data-id="{{ $id }}">
-        @if (isset($fetching))
-            @foreach ($fetching as $item)
-            <li>{{ ucfirst($item->item_name) }}</li>                
-            @endforeach
-        @else
-        <li id="null_item">You have no tasks/items in this list</li>
-        @endif
-    </ul> --}}
     <table id="chk_table" class="table" data-id="{{ $id }}">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>No</th>
                 <th>Name</th>
                 <th>Added</th>
@@ -21,15 +12,25 @@
         <tbody id="tablebody">
             @if (isset($fetching))
                 @foreach ($fetching as $item)
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->item_name }}</td>
                         <td>{{ $item->created_at }}</td>
-                        <td>nil</td>
+                        <td>
+                            @if ($item->status == 0)
+                            <div class="off_on" data-id="{{ $item->id }}">
+                                <i class="far fa-times-circle cross"></i>
+                            </div>
+                            @else
+                                <div class="off_on" data-id="{{ $item->id }}">
+                                    <i class="far fa-check-circle checkmark"></i>
+                                </div>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             @else
-                <tr id="null_items">
+                <tr class="text-center" id="null_items">
                     <td>empty</td>
                     <td>empty</td>
                     <td>empty</td>
