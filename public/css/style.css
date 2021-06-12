@@ -1,3 +1,18 @@
+.login-bg{
+    background: url(../img/user-login.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.regiser-bg{
+    background: url(../img/user-add.jpg);
+    background-position: 25%;
+    background-size: cover;
+}
+.emailunverfied-bg{
+    background: url(../img/key.jpg);
+    background-position: 45px;
+    background-size: cover;
+}
 .err {
     border: 1px solid tomato !important;
 }

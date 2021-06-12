@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,9 +56,11 @@ class userController extends Controller
                 $user->password = Hash::make($request->password);
                 $usercreated = $user->save();
                 if ($usercreated == true) {
+                    Auth::login($user);
+                    event(new Registered($user));
                     return response()->json([
                         'status' => true,
-                        'message' => 'Registration Successful'
+                        'message' => 'Account Created'
                     ]);
                 } else {
                     return response()->json([
@@ -109,6 +112,13 @@ class userController extends Controller
                 ]);
             }
         }
+    }
+
+    public function resend_Verification_mail(Request $request){
+        
+        $request->user()->sendEmailVerificationNotification();
+        
+        return back()->with('message', 'Verification link sent!');
     }
 
     public function logoutUser(Request $request){

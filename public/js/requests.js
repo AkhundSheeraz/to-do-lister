@@ -11,9 +11,21 @@ $(document).click(function (e) {
     }
 });
 
+function removeAlert() {
+    $checkAlert = $("#alertContainer").children();
+    if ($checkAlert.length > 0) {
+        setTimeout(() => {
+            $("#alertContainer").empty();
+        }, 4000)
+    }
+}
+removeAlert();
+
 function ucfirst(str) {
     return str[0].toUpperCase() + str.substring(1);
 }
+
+// !! AJAX REQUESTS !!
 
 // registration request
 $('#registerForm').on('submit', function (event) {
@@ -224,7 +236,7 @@ $('#checklist_form').on('submit', function (event) {
         } else {
             $chkinput.addClass('err');
             $checkoptinputs.addClass('err errcoloronly');
-            if(res.error.checklist != undefined){
+            if (res.error.checklist != undefined) {
                 $chkinput.attr("placeholder", res.error.checklist[0]);
             }
             $check_defualt.html(res.error.group_id[0]);
@@ -267,7 +279,7 @@ $('#add_task_item').on('submit', function (event) {
                     "<td>" + parseInt($rownum + 1) + "</td>" +
                     "<td>" + res.data.item_name + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
-                    "<td>" + "<div class='off_on' data-id='"+ res.data.id +"'><i class='far fa-times-circle cross'></i></div>" + "</td>"
+                    "<td>" + "<div class='off_on' data-id='" + res.data.id + "'><i class='far fa-times-circle cross'></i></div>" + "</td>"
                     + "</tr>"
                 );
             } else {
@@ -278,7 +290,7 @@ $('#add_task_item').on('submit', function (event) {
                     "<td>" + parseInt($rownum + 1) + "</td>" +
                     "<td>" + res.data.item_name + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
-                    "<td>" + "<div class='off_on' data-id='"+ res.data.id +"'><i class='far fa-times-circle cross'></i></div>" + "</td>"
+                    "<td>" + "<div class='off_on' data-id='" + res.data.id + "'><i class='far fa-times-circle cross'></i></div>" + "</td>"
                     + "</tr>"
                 );
             }
@@ -293,7 +305,7 @@ $('#add_task_item').on('submit', function (event) {
     });
 });
 
-$("#tablebody").on("click",".off_on", function () {
+$("#tablebody").on("click", ".off_on", function () {
     $id = $(this).attr('data-id');
     $div = $(this);
     const data = { id: $id };
@@ -302,11 +314,11 @@ $("#tablebody").on("click",".off_on", function () {
         url: '/status',
         type: 'POST',
         data: data
-    }).done(res=>{
+    }).done(res => {
         $div.empty();
-        if(res.data.status == 1){
+        if (res.data.status == 1) {
             $div.append("<i class='far fa-check-circle checkmark'></i>");
-        }else{
+        } else {
             $div.append("<i class='far fa-times-circle cross'></i>");
         }
     });
