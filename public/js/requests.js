@@ -12,14 +12,14 @@ $(document).click(function (e) {
 });
 
 function removeAlert() {
-    $checkAlert = $("#alertContainer").children();
+    $checkAlert = $(".alertContainer").children();
     if ($checkAlert.length > 0) {
         setTimeout(() => {
-            $("#alertContainer").empty();
+            $(".alertContainer").empty();
         }, 4000)
     }
 }
-removeAlert();
+// removeAlert();
 
 function ucfirst(str) {
     return str[0].toUpperCase() + str.substring(1);
@@ -322,4 +322,115 @@ $("#tablebody").on("click", ".off_on", function () {
             $div.append("<i class='far fa-times-circle cross'></i>");
         }
     });
-})
+});
+
+$("#passRecoverymail").on('submit', function (event) {
+    event.preventDefault();
+    $alert = $(".alertContainer").children();
+    $form = $("#passRecoverymail");
+    $flash = $(".flash");
+    $inputField = $("#forgetPassEmail");
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/forget-password',
+        type: 'POST',
+        data: $form.serialize()
+    }).done(res => {
+        if (res.status == true) {
+            $alert.removeClass("d-none");
+            $flash.html(res.message);
+            setTimeout(() => {
+                $alert.addClass("d-none");
+                $flash.html("");
+            }, 4000)
+            document.getElementById("passRecoverymail").reset();
+        }
+    }).catch(res => {
+        $error = res.responseJSON.errors.email.join(" ");
+        $inputField.addClass("err");
+        $inputField.attr("placeholder", $error);
+        setTimeout(() => {
+            $inputField.removeClass("err");
+            $inputField.attr("placeholder", "Enter Email Address...");
+        }, 3000);
+    })
+});
+
+$("#ResetpassForm").on("submit", function (event) {
+    event.preventDefault();
+    $alert = $(".alertContainer").children();
+    $flash = $(".flash");
+    $form = $("#ResetpassForm");
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: "/reset-password",
+        type: "POST",
+        data: $form.serialize()
+    }).done(res => {
+        if (res.status == true) {
+
+        } else {
+            $alert.removeClass("d-none");
+            $flash.html("Invalid E-mail");
+            setTimeout(() => {
+                $alert.addClass("d-none");
+                $flash.html("");
+            }, 4000);
+        }
+    }).catch(res => {
+        $email_length = $("input[name='email']").val().length;
+        $passcode_length = $("input[name='password']").val().length;
+        $passconfirm_length = $("input[name='password_confirmation']").val().length;
+        $e_inp = $("input[name='email']");
+        $p_inp = $("input[name='password']");
+        $pc_inp = $("input[name='password_confirmation']");
+        $btn = $("#passresetbtn");
+        if (res.responseJSON.errors.email) {
+            $email = res.responseJSON.errors.email.join(" ");
+            if ($email_length == 0) {
+                $e_inp.addClass('err');
+                $e_inp.attr('placeholder', $email)
+                setTimeout(() => {
+                    $e_inp.removeClass('err');
+                    $e_inp.attr('placeholder', "Enter Email Address...");
+                }, 3000);
+            }
+        }
+        if (res.responseJSON.errors.password) {
+            $password = res.responseJSON.errors.password.join(" & ");
+            if ($passcode_length == 0) {
+                $p_inp.addClass('err');
+                $p_inp.attr('placeholder', $password);
+                setTimeout(() => {
+                    $p_inp.removeClass('err');
+                    $p_inp.attr('placeholder', "Enter your new password...");
+                }, 3000);
+            } else {
+                $btn.addClass('errcolor');
+                $btn.html($password);
+                setTimeout(() => {
+                    $btn.removeClass('errcolor');
+                    $btn.html("Change Password!")
+                }, 4000);
+            }
+        }
+        if (res.responseJSON.errors.password_confirmation) {
+            $pass_confirm = res.responseJSON.errors.password_confirmation.join(" & ");
+            if ($passconfirm_length == 0) {
+                $pc_inp.addClass("err");
+                $pc_inp.attr('placeholder', $pass_confirm);
+                setTimeout(() => {
+                    $pc_inp.removeClass('err');
+                    $pc_inp.attr('placeholder', 'Confirm your password');
+                }, 3000);
+            }else{
+                $btn.addClass('errcolor');
+                $btn.html($pass_confirm);
+                setTimeout(() => {
+                    $btn.removeClass('errcolor');
+                    $btn.html("Change Password!")
+                }, 4000);
+            }
+        }
+    });
+});

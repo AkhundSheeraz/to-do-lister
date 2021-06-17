@@ -1,6 +1,6 @@
 <x-model-layout title="Unverified email">
     <h3 class="text-center my-3 text-gray-900">Unable to Log-in, Your email address is Unverified, please verify your email!</h3>
-    <div id="alertContainer">
+    <div class="alertContainer">
         @if (Session::has('message'))
         <div class="alert alert-success m-0">
             <h5 class="text-center">{{ Session::get('message') }}</h5>

@@ -13,6 +13,11 @@
     background-position: 45px;
     background-size: cover;
 }
+.forgetpass-bg{
+    background: url(../img/forgetpass.jpg);
+    background-position: center;
+    background-size: cover;
+}
 .err {
     border: 1px solid tomato !important;
 }
