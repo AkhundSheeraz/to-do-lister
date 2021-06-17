@@ -176,7 +176,7 @@ $('#group_form').on('submit', function (event) {
     const $form = $('#group_form');
     const $inpfield = $('#grp_inp');
     const $msg = $('#msg');
-    const $check = $('#group_ul').children('#null_groups');
+    const $check = $('#group_table_body').find('#null_groups');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_group',
@@ -190,10 +190,27 @@ $('#group_form').on('submit', function (event) {
             }, 3000);
             document.getElementById('group_form').reset();
             if ($check.length > 0) {
-                $('#group_ul').empty();
-                $('#group_ul').append('<li><a href="#">' + ucfirst(res.data.type) + '</a></li>');
+                $check.remove();
+                $tablebody = $("#group_table_body").children();
+                $countRow = $tablebody.length;
+                $('#group_table_body').append(
+                    "<tr>" +
+                    "<td>" + parseInt($countRow + 1) + "</td>" +
+                    "<td>" + ucfirst(res.data.type) + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "</tr>"
+                );
             } else {
-                $('#group_ul').append('<li><a href="#">' + ucfirst(res.data.type) + '</a></li>');
+                // $('#group_ul').append('<li><a href="#">' + ucfirst(res.data.type) + '</a></li>');
+                $tablebody = $("#group_table_body").children();
+                $countRow = $tablebody.length;
+                $('#group_table_body').append(
+                    "<tr>" +
+                    "<td>" + parseInt($countRow + 1) + "</td>" +
+                    "<td>" + ucfirst(res.data.type) + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "</tr>"
+                );
             }
         } else {
             $inpfield.addClass('err');
@@ -214,7 +231,7 @@ $('#checklist_form').on('submit', function (event) {
     const $check_defualt = $('#check_defualt');
     const $checkoptinputs = $('#check_opts');
     const $cmsg = $('.cmsg');
-    const $check = $('#checklistings').children('#null_lists');
+    const $check = $('#checklists_table').find('#null_lists');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/add_checklist',
@@ -228,10 +245,26 @@ $('#checklist_form').on('submit', function (event) {
             }, 3000)
             document.getElementById('checklist_form').reset();
             if ($check.length > 0) {
-                $('#checklistings').empty();
-                $('#checklistings').append('<li><a href="http://my-app.test/view_list/' + res.data.id + '">' + ucfirst(res.data.checklist_name) + '</a></li>');
+                $check.remove();
+                $tablebody = $("#checklists_table").children();
+                $countRow = $tablebody.length;
+                $('#checklists_table').append(
+                    "<tr>" +
+                    "<td>" + parseInt($countRow + 1) + "</td>" +
+                    "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "</tr>"
+                );
             } else {
-                $('#checklistings').append('<li><a href="http://my-app.test/view_list/' + res.data.id + '">' + ucfirst(res.data.checklist_name) + '</a></li>');
+                $tablebody = $("#checklists_table").children();
+                $countRow = $tablebody.length;
+                $('#checklists_table').append(
+                    "<tr>" +
+                    "<td>" + parseInt($countRow + 1) + "</td>" +
+                    "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
+                    "<td>" + res.data.created_at + "</td>" +
+                    "</tr>"
+                );
             }
         } else {
             $chkinput.addClass('err');
@@ -330,6 +363,7 @@ $("#passRecoverymail").on('submit', function (event) {
     $form = $("#passRecoverymail");
     $flash = $(".flash");
     $inputField = $("#forgetPassEmail");
+    $btn = $('#fpbtn');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/forget-password',
@@ -344,6 +378,13 @@ $("#passRecoverymail").on('submit', function (event) {
                 $flash.html("");
             }, 4000)
             document.getElementById("passRecoverymail").reset();
+        } else {
+            $btn.addClass('errcolor');
+            $btn.html(res.email);
+            setTimeout(() => {
+                $btn.removeClass('errcolor');
+                $btn.html("Reset Password");
+            }, 3500)
         }
     }).catch(res => {
         $error = res.responseJSON.errors.email.join(" ");
@@ -355,6 +396,22 @@ $("#passRecoverymail").on('submit', function (event) {
         }, 3000);
     })
 });
+
+function reset_successMsg() {
+    $(window).on('load', function () {
+        $alert = $(".alertContainer").children();
+        $flash = $(".flash");
+        $alert.removeClass("d-none");
+        $flash.html("Password changed! please login");
+        setTimeout(() => {
+            $alert.addClass("d-none");
+            $flash.html("");
+        }, 4000);
+    });
+}
+if (window.location.hash === "#msg") {
+    reset_successMsg();
+}
 
 $("#ResetpassForm").on("submit", function (event) {
     event.preventDefault();
@@ -368,7 +425,7 @@ $("#ResetpassForm").on("submit", function (event) {
         data: $form.serialize()
     }).done(res => {
         if (res.status == true) {
-
+            window.location.href = 'http://my-app.test/#msg';
         } else {
             $alert.removeClass("d-none");
             $flash.html("Invalid E-mail");
@@ -423,7 +480,7 @@ $("#ResetpassForm").on("submit", function (event) {
                     $pc_inp.removeClass('err');
                     $pc_inp.attr('placeholder', 'Confirm your password');
                 }, 3000);
-            }else{
+            } else {
                 $btn.addClass('errcolor');
                 $btn.html($pass_confirm);
                 setTimeout(() => {

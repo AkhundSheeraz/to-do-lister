@@ -1,7 +1,7 @@
 <x-layout title="checklist">
     <button id="add_btn">Add-Checklist</button>
     <div>
-        <ul id="checklistings">
+        {{-- <ul id="checklistings">
             @if (isset($checklists))
                 @foreach ($checklists as $checklist)
                     <li><a href="{{Route('view_list',$checklist->id)}}">{{ ucfirst($checklist->checklist_name) }}</li></a>
@@ -9,7 +9,33 @@
             @else
             <li id="null_lists">You Have no checklists</li>
             @endif
-        </ul>
+        </ul> --}}
+        <table class="table text-center table_size">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody id="checklists_table">
+                @if (isset($checklists))
+                    @foreach ($checklists as $checklist)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $checklist->checklist_name }}</td>
+                        <td>{{ $checklist->created_at }}</td>
+                    </tr>
+                    @endforeach
+                @else
+                <tr id="null_lists">
+                    <td>empty</td>
+                    <td>empty</td>
+                    <td>empty</td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
     </div>
 
     <x-modal heading="Add a Checklist">

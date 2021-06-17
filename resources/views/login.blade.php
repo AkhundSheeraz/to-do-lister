@@ -1,46 +1,43 @@
 <x-model-layout title="Login">
-<!-- Nested Row within Card Body -->
-<div class="row">
-    <div class="col-lg-6 d-none d-lg-block login-bg"></div>
-    <div class="col-lg-6">
-        <div class="p-5">
-            <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-            </div>
-            <form id="user_Login" class="user">
-                <div class="form-group">
-                    <input type="email" class="form-control form-control-user"
-                        id="login_email" name="email" aria-describedby="emailHelp"
-                        placeholder="Enter Email Address...">
+    <div class="alertContainer">
+        <div class="alert alert-success m-1 d-none">
+            <h5 class="text-center flash"></h5>
+        </div>
+    </div>
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="col-lg-6 d-none d-lg-block login-bg"></div>
+        <div class="col-lg-6">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control form-control-user"
-                        id="login_password" name="password" placeholder="Password">
-                </div>
-                {{-- <div class="form-group">
-                    <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember
-                            Me</label>
+                <form id="user_Login" class="user">
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-user" id="login_email" name="email"
+                            aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
-                </div> --}}
-                <button type="submit" id="loginBtn" class="btn btn-primary btn-user btn-block">Login</button>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-user" id="login_password"
+                            name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" id="loginBtn" class="btn btn-primary btn-user btn-block">Login</button>
+                    <hr>
+                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                        <i class="fab fa-google fa-fw"></i> Login with Google
+                    </a>
+                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                    </a>
+                </form>
                 <hr>
-                <a href="index.html" class="btn btn-google btn-user btn-block">
-                    <i class="fab fa-google fa-fw"></i> Login with Google
-                </a>
-                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                </a>
-            </form>
-            <hr>
-            <div class="text-center">
-                <a class="small" href="/forgetpassword">Forgot Password?</a>
-            </div>
-            <div class="text-center">
-                <a class="small" href="/register">Create an Account!</a>
+                <div class="text-center">
+                    <a class="small" href="/forgetpassword">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                    <a class="small" href="/register">Create an Account!</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </x-model-layout>

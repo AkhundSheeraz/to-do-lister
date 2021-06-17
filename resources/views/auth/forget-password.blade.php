@@ -18,7 +18,7 @@
                         <input type="email" class="form-control form-control-user" name="email" id="forgetPassEmail"
                             aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">Reset Password</button>
+                    <button type="submit" id="fpbtn" class="btn btn-primary btn-user btn-block">Reset Password</button>
                 </form>
                 <hr>
                 <div class="text-center">

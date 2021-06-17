@@ -115,6 +115,11 @@
     margin: 0 auto !important;
 }
 
+.table_size{
+    max-width: 80% !important;
+    margin: 0 auto !important;
+}
+
 .cross {
     color: tomato !important;
     font-size: 20px !important;

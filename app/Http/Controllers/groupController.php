@@ -46,7 +46,7 @@ class groupController extends Controller
 
     public function fetchGroups()
     {
-        $groups = Group::where('user_id', auth()->user()->id)->get('type');
+        $groups = Group::where('user_id', auth()->user()->id)->get();
         if ($groups->count() > 0) {
             return view('groups', compact('groups'));
         } else {
