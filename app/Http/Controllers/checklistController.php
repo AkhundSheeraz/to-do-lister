@@ -96,15 +96,52 @@ class checklistController extends Controller
 
     public function get_taskoritems($id)
     {
-        $fetching = Items::whereHas('checklists', function ($query) use($id){
+        $fetching = Items::whereHas('checklists', function ($query) use ($id) {
             $query->whereHas('group', function ($queryagain) {
                 $queryagain->where('user_id', auth()->user()->id);
-            })->where('checklists_id',$id);
+            })->where('checklists_id', $id);
         })->get();
         if ($fetching->count() > 0) {
             return view('view_checklist', ['id' => $id])->with(compact('fetching'));
         } else {
             return view('view_checklist', ['id' => $id]);
+        }
+    }
+
+    public function stats()
+    {
+        $count = Checklist::whereHas('group', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->get()->count();
+
+        $total_items = Items::whereHas('checklists', function ($query) {
+            $query->whereHas('group', function ($query2) {
+                $query2->where('user_id', auth()->user()->id);
+            });
+        })->get()->count();
+
+        $completed = Items::whereHas('checklists', function ($query) {
+            $query->whereHas('group', function ($query2) {
+                $query2->where('user_id', auth()->user()->id);
+            });
+        })->where('status', 1)->get()->count();
+
+        $pending = Items::whereHas('checklists', function ($query) {
+            $query->whereHas('group', function ($query2) {
+                $query2->where('user_id', auth()->user()->id);
+            });
+        })->where('status', 0)->get()->count();
+
+        if ($count > 0 && $total_items > 0 && $completed > 0 && $pending > 0) {
+            return view('welcome', compact('count', 'total_items', 'completed', 'pending'));
+        } else if ($count > 0 && $total_items > 0 && $completed > 0) {
+            return view('welcome', compact('count', 'total_items', 'completed'));
+        } else if ($count > 0 && $total_items > 0) {
+            return view('welcome', compact('count', 'total_items'));
+        } else if ($count > 0) {
+            return view('welcome', compact('count'));
+        } else {
+            return view('welcome');
         }
     }
 }

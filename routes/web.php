@@ -23,9 +23,9 @@ Route::get('/', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
-Route::get('/home', function () {
-    return view('welcome');
-})->name('home')->middleware('verified');
+Route::get('/home', [
+    checklistController::class, 'stats'
+])->name('home')->middleware('verified');
 
 Route::get('/group', [
     groupController::class, 'fetchGroups'

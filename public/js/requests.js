@@ -11,15 +11,10 @@ $(document).click(function (e) {
     }
 });
 
-function removeAlert() {
-    $checkAlert = $(".alertContainer").children();
-    if ($checkAlert.length > 0) {
-        setTimeout(() => {
-            $(".alertContainer").empty();
-        }, 4000)
-    }
-}
-// removeAlert();
+$("#checklists_table").on('click','.checklist-row',function(){
+    $redirect = $(this).attr("data-href");
+    window.location.href = $redirect;  
+});
 
 function ucfirst(str) {
     return str[0].toUpperCase() + str.substring(1);
@@ -249,7 +244,7 @@ $('#checklist_form').on('submit', function (event) {
                 $tablebody = $("#checklists_table").children();
                 $countRow = $tablebody.length;
                 $('#checklists_table').append(
-                    "<tr>" +
+                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/"+ res.data.id +"'>" +
                     "<td>" + parseInt($countRow + 1) + "</td>" +
                     "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
@@ -259,7 +254,7 @@ $('#checklist_form').on('submit', function (event) {
                 $tablebody = $("#checklists_table").children();
                 $countRow = $tablebody.length;
                 $('#checklists_table').append(
-                    "<tr>" +
+                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/"+ res.data.id +"'>" +
                     "<td>" + parseInt($countRow + 1) + "</td>" +
                     "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +

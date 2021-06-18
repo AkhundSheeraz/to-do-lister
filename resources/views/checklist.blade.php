@@ -10,7 +10,7 @@
             <li id="null_lists">You Have no checklists</li>
             @endif
         </ul> --}}
-        <table class="table text-center table_size">
+        <table class="table table-hover text-center table_size">
             <thead>
                 <tr>
                     <th>No.</th>
@@ -21,7 +21,7 @@
             <tbody id="checklists_table">
                 @if (isset($checklists))
                     @foreach ($checklists as $checklist)
-                    <tr>
+                    <tr class="checklist-row" data-href="{{Route('view_list',$checklist->id)}}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $checklist->checklist_name }}</td>
                         <td>{{ $checklist->created_at }}</td>
