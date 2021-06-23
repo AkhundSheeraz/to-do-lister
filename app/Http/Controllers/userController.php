@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class userController extends Controller
 {
@@ -187,5 +188,28 @@ class userController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function microsoft(){
+        return Socialite::driver('azure')->redirect();
+    }
+
+    public function microsoft_redirect(){
+        //code here
+    }
+
+    public function google(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function google_redirect(){
+        $user =  Socialite::driver('google')->user();
+        $usermail_exists = User::where('email', $user->email)->count();
+        if($usermail_exists > 0){
+            $userID = User::where('email', $user->email)->get();
+            $id = $userID[0]->id;
+            Auth::loginUsingId($id);
+            return redirect('home');
+        }
     }
 }

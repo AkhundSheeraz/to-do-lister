@@ -23,11 +23,11 @@
                     </div>
                     <button type="submit" id="loginBtn" class="btn btn-primary btn-user btn-block">Login</button>
                     <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                    <a href="{{ Route('google') }}" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Login with Google
                     </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                    <a href="{{ Route('microsoft') }}" class="btn btn-facebook btn-user btn-block">
+                        <i class="fab fa-microsoft fa-fw"></i> Login with Microsoft
                     </a>
                 </form>
                 <hr>

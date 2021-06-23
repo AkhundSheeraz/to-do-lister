@@ -43,6 +43,8 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('/redirect', [userController::class, 'google_redirect']);
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/home');
@@ -60,6 +62,14 @@ Route::get('/forgetpassword', function () {
     return view('auth.forget-password');
 })->middleware('guest')->name("password.request");
 
+Route::get('/microsoft', [userController::class, 'microsoft'])->name('microsoft');
+
+Route::get('/google', [userController::class, 'google'])->name('google');
+
+Route::get('/google/redirect', [userController::class, 'google_redirect']);
+
+Route::get('/microsoft/redirect', [userController::class, 'microsoft_redirect']);
+
 Route::get('/logout', [userController::class, 'logoutUser']);
 
 //Post Requests
@@ -74,9 +84,9 @@ Route::post('/email/verification-notification', [
     userController::class, 'resend_Verification_mail'
 ])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::post('/forget-password',[
-    userController::class,'reset_Passwords'
-    ])->middleware('guest')->name('password.email');
+Route::post('/forget-password', [
+    userController::class, 'reset_Passwords'
+])->middleware('guest')->name('password.email');
 
 Route::post('/reset-password', [
     userController::class, 'set_new_password'
