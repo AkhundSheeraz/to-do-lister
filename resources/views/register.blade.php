@@ -1,3 +1,8 @@
+@if (session()->get('data'))
+    @php
+        $user = session()->get('data')->user;
+    @endphp
+@endif
 <x-model-layout title="Registration">
     <!-- Nested Row within Card Body -->
     <div class="row">
@@ -11,34 +16,41 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user" name="firstname" id="FirstName"
-                                placeholder="First Name">
+                                placeholder="First Name" @isset($user)
+                                    value="{{ $user['given_name'] }}"
+                                @endisset >
                         </div>
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user" name="lastname" id="LastName"
-                                placeholder="Last Name">
+                                placeholder="Last Name" @isset($user)
+                                    value="{{ $user['family_name'] }}"
+                                @endisset >
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control form-control-user" name="email" id="InputEmail"
-                            placeholder="Email Address">
+                            placeholder="Email Address" @isset($user)
+                            value="{{ $user['email'] }}"
+                            @endisset>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="password" class="form-control form-control-user" name="password" id="InputPassword"
-                                placeholder="Password">
+                            <input type="password" class="form-control form-control-user" name="password"
+                                id="InputPassword" placeholder="Password">
                         </div>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control form-control-user" name="password_confirmation" id="RepeatPassword"
-                                placeholder="Repeat Password">
+                            <input type="password" class="form-control form-control-user" name="password_confirmation"
+                                id="RepeatPassword" placeholder="Repeat Password">
                         </div>
                     </div>
-                    <button type="submit" id="RegisterBtn" class="btn btn-primary btn-user btn-block">Register Account</button>
+                    <button type="submit" id="RegisterBtn" class="btn btn-primary btn-user btn-block">Register
+                        Account</button>
                     <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                    <a href="{{ Route('google') }}" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Register with Google
                     </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                        <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                    <a href="#" class="btn btn-facebook btn-user btn-block">
+                        <i class="fab fa-windows"></i> Login with Microsoft
                     </a>
                 </form>
                 <hr>

@@ -130,8 +130,8 @@ class userController extends Controller
     public function reset_Passwords(Request $request)
     {
         $validation = $request->validate([
-            'email' => ['required','email']
-        ],[
+            'email' => ['required', 'email']
+        ], [
             'email.required' => 'E-mail is Required!'
         ]);
         $status = Password::sendResetLink($validation);
@@ -139,7 +139,7 @@ class userController extends Controller
             ? response()->json([
                 'status' => true,
                 'message' => __($status)
-                ])
+            ])
             : response()->json([
                 'status' => false,
                 'email' => __($status)
@@ -150,10 +150,10 @@ class userController extends Controller
     {
         $request->validate([
             'token' => ['required'],
-            'email' => ['required','email'],
-            'password' => ['required','min:6','confirmed'],
-            'password_confirmation' => ['required','min:6']
-        ],[
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6', 'confirmed'],
+            'password_confirmation' => ['required', 'min:6']
+        ], [
             'token.required' => 'token is required!',
             'email.required' => 'Email is required!',
             'email.email' => 'email should have @',
@@ -190,26 +190,33 @@ class userController extends Controller
         return redirect('/');
     }
 
-    public function microsoft(){
+    public function microsoft()
+    {
+        //doesn't work
         return Socialite::driver('azure')->redirect();
     }
 
-    public function microsoft_redirect(){
+    public function microsoft_redirect()
+    {
         //code here
     }
 
-    public function google(){
+    public function google()
+    {
         return Socialite::driver('google')->redirect();
     }
 
-    public function google_redirect(){
+    public function google_redirect()
+    {
         $user =  Socialite::driver('google')->user();
         $usermail_exists = User::where('email', $user->email)->count();
-        if($usermail_exists > 0){
+        if ($usermail_exists > 0) {
             $userID = User::where('email', $user->email)->get();
             $id = $userID[0]->id;
             Auth::loginUsingId($id);
             return redirect('home');
+        } else {
+            return redirect('register')->with('data', $user);
         }
     }
 }

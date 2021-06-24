@@ -41,7 +41,7 @@ Route::get('/view_list/{id}', [
 
 Route::get('/register', function () {
     return view('register');
-});
+})->middleware('guest');
 
 Route::get('/redirect', [userController::class, 'google_redirect']);
 
@@ -66,7 +66,7 @@ Route::get('/microsoft', [userController::class, 'microsoft'])->name('microsoft'
 
 Route::get('/google', [userController::class, 'google'])->name('google');
 
-Route::get('/google/redirect', [userController::class, 'google_redirect']);
+// Route::get('/google/redirect', [userController::class, 'google_redirect']);
 
 Route::get('/microsoft/redirect', [userController::class, 'microsoft_redirect']);
 

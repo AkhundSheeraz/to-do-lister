@@ -26,8 +26,8 @@
                     <a href="{{ Route('google') }}" class="btn btn-google btn-user btn-block">
                         <i class="fab fa-google fa-fw"></i> Login with Google
                     </a>
-                    <a href="{{ Route('microsoft') }}" class="btn btn-facebook btn-user btn-block">
-                        <i class="fab fa-microsoft fa-fw"></i> Login with Microsoft
+                    <a href="#" class="btn btn-facebook btn-user btn-block">
+                        <i class="fab fa-windows"></i> Login with Microsoft
                     </a>
                 </form>
                 <hr>
