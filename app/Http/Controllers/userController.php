@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\sendverification_mail;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
@@ -61,8 +62,8 @@ class userController extends Controller
                 $user->password = Hash::make($request->password);
                 $usercreated = $user->save();
                 if ($usercreated == true) {
+                    sendverification_mail::dispatch($user);
                     Auth::login($user);
-                    event(new Registered($user));
                     return response()->json([
                         'status' => true,
                         'message' => 'Account Created'
