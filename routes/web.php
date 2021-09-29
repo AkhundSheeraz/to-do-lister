@@ -18,30 +18,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['verified'])->group(function () {
+
+    Route::get('/home', [checklistController::class, 'stats'])->name('home');
+
+    Route::get('/group', [groupController::class, 'fetchGroups'])->name('group');
+
+    Route::get('/checklist', [checklistController::class, 'Get_groups'])->name('checklist');
+
+    Route::get('/view_list/{id}', [checklistController::class, 'get_taskoritems'])->name('view_list');
+
+    Route::get('/addfriends', [userController::class, 'show_friends'])->name('addingfriends');
+});
+
+
 
 Route::get('/', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
-Route::get('/home', [
-    checklistController::class, 'stats'
-])->name('home')->middleware('verified');
-
-Route::get('/group', [
-    groupController::class, 'fetchGroups'
-])->name('group')->middleware('verified');
-
-Route::get('/checklist', [
-    checklistController::class, 'Get_groups'
-])->name('checklist')->middleware('verified');
-
-Route::get('/view_list/{id}', [
-    checklistController::class, 'get_taskoritems'
-])->name('view_list')->middleware('verified');
 
 Route::get('/register', function () {
     return view('register');
 })->middleware('guest');
+
 
 Route::get('/redirect', [userController::class, 'google_redirect']);
 

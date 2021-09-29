@@ -98,7 +98,11 @@
                                 @if (isset($pending))
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pending }}</div>
                                 @else
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    @if (isset($total_items))
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_items }}</div>
+                                    @else
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"> 0 </div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="col-auto">

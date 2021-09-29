@@ -103,7 +103,7 @@ class userController extends Controller
                 if (Auth::attempt($credentials)) {
                     return response()->json([
                         'status' => true,
-                        'message' => 'http://my-app.test/home'
+                        'message' => 'http://to-do-lister.test:8080/home'
                     ]);
                 } else {
                     return response()->json([
@@ -183,6 +183,12 @@ class userController extends Controller
                 'status' => false,
                 'message' => __($status)
             ]);
+    }
+
+    public function show_friends()
+    {
+        $friends = User::all('id','firstname','lastname','email')->except(Auth::id());
+        return view('addfriend', compact('friends'));
     }
 
     public function logoutUser(Request $request)
