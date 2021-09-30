@@ -74,6 +74,7 @@ Route::get('/logout', [userController::class, 'logoutUser']);
 
 //Post Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);
+Route::post('/friendrequestsent', [userController::class, 'sending_friendRequest']);
 Route::post('/login_user', [userController::class, 'loginUser']);
 Route::post('/add_group', [groupController::class, 'addGroup']);
 Route::post('/add_checklist', [checklistController::class, 'add_checklist']);

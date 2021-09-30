@@ -15,7 +15,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$friend->firstname .' '. $friend->lastname}}</td>
                         <td>{{$friend->email}}</td>
-                        <td><button class="btn btn-outline-primary">Add</button></td>
+                        <td><button class="btn btn-outline-primary dost">Add</button></td>
                     </tr>
                 @endforeach
                 {{-- <tr id="null_friends">

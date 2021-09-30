@@ -56,6 +56,7 @@
                 <h6 class="collapse-header">I Want To:</h6>
                 <a class="collapse-item" href="{{ route('addingfriends') }}">Add a Friend</a>
                 <a class="collapse-item" href="#">My Friends</a>
+                <a class="collapse-item" href="#">Friend Requests</a>
                 <a class="collapse-item" href="#">Chat with Friend</a>
                 {{-- <a class="collapse-item" href="#">Animations</a>--}}
             </div>

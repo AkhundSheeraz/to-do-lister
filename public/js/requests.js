@@ -11,9 +11,9 @@ $(document).click(function (e) {
     }
 });
 
-$("#checklists_table").on('click','.checklist-row',function(){
+$("#checklists_table").on('click', '.checklist-row', function () {
     $redirect = $(this).attr("data-href");
-    window.location.href = $redirect;  
+    window.location.href = $redirect;
 });
 
 function ucfirst(str) {
@@ -244,7 +244,7 @@ $('#checklist_form').on('submit', function (event) {
                 $tablebody = $("#checklists_table").children();
                 $countRow = $tablebody.length;
                 $('#checklists_table').append(
-                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/"+ res.data.id +"'>" +
+                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/" + res.data.id + "'>" +
                     "<td>" + parseInt($countRow + 1) + "</td>" +
                     "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
@@ -254,7 +254,7 @@ $('#checklist_form').on('submit', function (event) {
                 $tablebody = $("#checklists_table").children();
                 $countRow = $tablebody.length;
                 $('#checklists_table').append(
-                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/"+ res.data.id +"'>" +
+                    "<tr class='checklist-row' data-href='http://my-app.test/view_list/" + res.data.id + "'>" +
                     "<td>" + parseInt($countRow + 1) + "</td>" +
                     "<td>" + ucfirst(res.data.checklist_name) + "</td>" +
                     "<td>" + res.data.created_at + "</td>" +
@@ -485,4 +485,21 @@ $("#ResetpassForm").on("submit", function (event) {
             }
         }
     });
+});
+
+$('.dost').on('click', (e) => {
+    const row = e.currentTarget.parentElement.parentElement;
+    // console.log(e.currentTarget.parentElement.parentElement);
+    // console.log(row.getAttribute("data-id"));
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: "/friendrequestsent",
+        type: "POST",
+        data: { id: row.getAttribute("data-id") }
+    }).done(res => {
+        console.log(res);
+    }).fail(res => {
+        console.log(res);
+    });
+
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\sendverification_mail;
+use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
@@ -225,5 +226,24 @@ class userController extends Controller
         } else {
             return redirect('register')->with('data', $user);
         }
+    }
+
+    public function sending_friendRequest(Request $request)
+    {
+        // $user = User::find($request->id);
+        $friend = new Friend();
+        $friend->user_id = Auth::id();
+        $friend->friend_id = $request->id;
+        $friend->save();
+        if($friend){
+            return response()->json([
+                "status" => true,
+                "msg" => 'Friend request sent',
+            ]);
+        }
+        return response()->json([
+            "status" => false,
+            "msg" => 'Friend request failed',
+        ]);
     }
 }
