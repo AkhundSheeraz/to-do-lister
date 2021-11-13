@@ -104,7 +104,7 @@ class userController extends Controller
                 if (Auth::attempt($credentials)) {
                     return response()->json([
                         'status' => true,
-                        'message' => 'http://to-do-lister.test:8080/home'
+                        'message' => 'http://localhost:8000/home'
                     ]);
                 } else {
                     return response()->json([
