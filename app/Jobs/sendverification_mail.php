@@ -35,5 +35,5 @@ class sendverification_mail implements ShouldQueue
     {
         event(new Registered($this->user));
     }
-    
+
 }
