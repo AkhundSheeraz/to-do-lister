@@ -10,6 +10,7 @@
                 </tr>
             </thead>
             <tbody id="friends">
+                @if ($friends->isNotEmpty())
                 @foreach ($friends as $friend)
                     <tr data-id="{{$friend->id}}">
                         <td>{{$loop->iteration}}</td>
@@ -18,12 +19,14 @@
                         <td><button class="btn btn-outline-primary dost">Add</button></td>
                     </tr>
                 @endforeach
-                {{-- <tr id="null_friends">
+                @else
+                <tr id="null_friends">
                     <td>empty</td>
                     <td>empty</td>
                     <td>empty</td>
                     <td>empty</td>
-                </tr> --}}
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

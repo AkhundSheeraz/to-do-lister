@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['verified'])->group(function () {
+
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [checklistController::class, 'stats'])->name('home');
 
@@ -72,14 +73,18 @@ Route::get('/microsoft/redirect', [userController::class, 'microsoft_redirect'])
 
 Route::get('/logout', [userController::class, 'logoutUser']);
 
-//Post Requests
+//Post non auth Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);
-Route::post('/friendrequestsent', [userController::class, 'sending_friendRequest']);
 Route::post('/login_user', [userController::class, 'loginUser']);
-Route::post('/add_group', [groupController::class, 'addGroup']);
-Route::post('/add_checklist', [checklistController::class, 'add_checklist']);
-Route::post('/add_item', [checklistController::class, 'insert_taskorItem']);
-Route::post('/status', [itemController::class, 'change_status']);
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::post('/friendrequestsent', [userController::class, 'sending_friendRequest']);
+    Route::post('/add_group', [groupController::class, 'addGroup']);
+    Route::post('/add_checklist', [checklistController::class, 'add_checklist']);
+    Route::post('/add_item', [checklistController::class, 'insert_taskorItem']);
+    Route::post('/status', [itemController::class, 'change_status']);
+});
 
 Route::post('/email/verification-notification', [
     userController::class, 'resend_Verification_mail'

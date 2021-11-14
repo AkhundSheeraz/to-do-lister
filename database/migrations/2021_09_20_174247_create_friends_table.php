@@ -17,7 +17,8 @@ class CreateFriendsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('friend_id')->unique();
+            $table->bigInteger('friend_id')->unsigned()->index()->nullable();
+            $table->foreign('friend_id')->references('id')->on('users');
             $table->boolean('confirmed')->default(0);
             $table->timestamps();
         });

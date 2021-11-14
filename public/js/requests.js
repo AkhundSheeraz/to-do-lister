@@ -497,9 +497,9 @@ $('.dost').on('click', (e) => {
         type: "POST",
         data: { id: row.getAttribute("data-id") }
     }).done(res => {
-        console.log(res);
+        window.location.reload();
     }).fail(res => {
-        console.log(res);
+        console.error(res);
     });
 
 });

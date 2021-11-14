@@ -63,8 +63,8 @@ class userController extends Controller
                 $user->password = Hash::make($request->password);
                 $usercreated = $user->save();
                 if ($usercreated == true) {
-                    sendverification_mail::dispatch($user);
-                    Auth::login($user);
+                    // sendverification_mail::dispatch($user);
+                    // Auth::login($user);
                     return response()->json([
                         'status' => true,
                         'message' => 'Account Created'
@@ -188,7 +188,9 @@ class userController extends Controller
 
     public function show_friends()
     {
-        $friends = User::all('id','firstname','lastname','email')->except(Auth::id());
+        $friend_requests = Friend::where('user_id',Auth::id())->get('friend_id')->pluck('friend_id')->toArray();
+        array_push($friend_requests,auth()->id());
+        $friends = User::all('id','firstname','lastname','email')->except($friend_requests);
         return view('addfriend', compact('friends'));
     }
 
@@ -230,7 +232,6 @@ class userController extends Controller
 
     public function sending_friendRequest(Request $request)
     {
-        // $user = User::find($request->id);
         $friend = new Friend();
         $friend->user_id = Auth::id();
         $friend->friend_id = $request->id;
