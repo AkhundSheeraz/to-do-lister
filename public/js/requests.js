@@ -29,7 +29,7 @@ $('#registerForm').on('submit', function (event) {
     const btn = $('#RegisterBtn');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/registersuccess',
+        url: base_url+'/registersuccess',
         type: 'POST',
         data: $form.serialize()
     }).done(res => {
@@ -120,7 +120,7 @@ $('#user_Login').on('submit', function (event) {
     const $form = $('#user_Login');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/login_user',
+        url: base_url+'/login_user',
         type: 'POST',
         data: $form.serialize()
     }).done(res => {
@@ -174,7 +174,7 @@ $('#group_form').on('submit', function (event) {
     const $check = $('#group_table_body').find('#null_groups');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/add_group',
+        url: base_url+'/add_group',
         type: 'POST',
         data: $form.serialize()
     }).done(res => {
@@ -229,7 +229,7 @@ $('#checklist_form').on('submit', function (event) {
     const $check = $('#checklists_table').find('#null_lists');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/add_checklist',
+        url: base_url+'/add_checklist',
         type: 'POST',
         data: $form.serialize()
     }).done(res => {
@@ -288,7 +288,7 @@ $('#add_task_item').on('submit', function (event) {
     $insideList = $("#tablebody").find("#null_items");
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/add_item',
+        url: base_url+'/add_item',
         type: 'POST',
         data: $form.serialize() + "&id=" + $checklist_id
     }).done(res => {
@@ -339,7 +339,7 @@ $("#tablebody").on("click", ".off_on", function () {
     const data = { id: $id };
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/status',
+        url: base_url+'/status',
         type: 'POST',
         data: data
     }).done(res => {
@@ -361,7 +361,7 @@ $("#passRecoverymail").on('submit', function (event) {
     $btn = $('#fpbtn');
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/forget-password',
+        url: base_url+'/forget-password',
         type: 'POST',
         data: $form.serialize()
     }).done(res => {
@@ -415,7 +415,7 @@ $("#ResetpassForm").on("submit", function (event) {
     $form = $("#ResetpassForm");
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: "/reset-password",
+        url: base_url+"/reset-password",
         type: "POST",
         data: $form.serialize()
     }).done(res => {
@@ -493,7 +493,7 @@ $('.dost').on('click', (e) => {
     // console.log(row.getAttribute("data-id"));
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: "/friendrequestsent",
+        url:base_url+ "/friendrequestsent",
         type: "POST",
         data: { id: row.getAttribute("data-id") }
     }).done(res => {

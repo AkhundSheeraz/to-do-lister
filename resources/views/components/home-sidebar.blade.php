@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-clipboard-list"></i>
         </div>
@@ -37,8 +37,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Create Categories</h6>
-                <a class="collapse-item" href="/group">Groups</a>
-                <a class="collapse-item" href="/checklist">Checklist</a>
+                <a class="collapse-item" href="{{ route('group') }}">Groups</a>
+                <a class="collapse-item" href="{{ route('checklist') }}">Checklist</a>
             </div>
         </div>
     </li>

@@ -41,7 +41,7 @@ Route::get('/', function () {
 
 Route::get('/register', function () {
     return view('register');
-})->middleware('guest');
+})->middleware('guest')->name('register');
 
 
 Route::get('/redirect', [userController::class, 'google_redirect']);
@@ -71,7 +71,7 @@ Route::get('/google', [userController::class, 'google'])->name('google');
 
 Route::get('/microsoft/redirect', [userController::class, 'microsoft_redirect']);
 
-Route::get('/logout', [userController::class, 'logoutUser']);
+Route::get('/logout', [userController::class, 'logoutUser'])->name('logout');
 
 //Post non auth Requests
 Route::post('/registersuccess', [userController::class, 'registerUser']);

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>My-App | {{ $title }}</title>
-    
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('lib/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -30,6 +30,10 @@
         </div>
 
     </div>
+
+    <script>
+        var base_url = {!! json_encode(url('/')) !!}
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
